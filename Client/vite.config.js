@@ -7,6 +7,7 @@ export default defineConfig({
     'process.env': process.env
   },
   plugins: [react()],
+  base: process.env.VITE_BASE_PATH || "/e-commerce-project",
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
