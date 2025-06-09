@@ -22,17 +22,23 @@ const AddCosmetic = () => {
 
     try {
       let uploadedImageUrl = imageUrl;
+
+      // Upload to Cloudinary if no direct imageUrl provided
       if (!imageUrl && image) {
         const formData = new FormData();
         formData.append("file", image);
         formData.append("upload_preset", "imageupload1");
         formData.append("cloud_name", "degumncul");
 
-        const res = await axios.post("https://api.cloudinary.com/v1_1/degumncul/image/upload", formData);
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/degumncul/image/upload",
+          formData
+        );
         uploadedImageUrl = res.data.secure_url;
       }
 
-      await axios.post("http://localhost:3001/createCos", {
+      // ✅ Use Render backend URL
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/createCos", {
         name,
         price: Number(price),
         rating: Number(rating),

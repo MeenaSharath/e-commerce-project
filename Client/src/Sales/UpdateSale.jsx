@@ -13,7 +13,7 @@ const UpdateSale = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getSale/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/getSale/${id}`)
       .then(res => {
         setOrderid(res.data.orderid || '');
         setName(res.data.name || '');
@@ -42,7 +42,7 @@ const UpdateSale = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/updateSale/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateSale/${id}`, {
       orderid,
       name,
       products,

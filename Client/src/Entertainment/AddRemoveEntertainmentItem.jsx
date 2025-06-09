@@ -21,7 +21,7 @@ const AddRemoveEntertainmentItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/entertainmentpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/entertainmentpage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ const AddRemoveEntertainmentItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteEntertainment/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteEntertainment/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

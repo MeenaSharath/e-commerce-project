@@ -21,7 +21,7 @@ const AddRemoveFashionItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/fashionpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/fashionpage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ const AddRemoveFashionItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteFashion/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteFashion/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

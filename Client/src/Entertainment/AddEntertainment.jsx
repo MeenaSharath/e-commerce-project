@@ -33,7 +33,7 @@ const AddEntertainment = () => {
     }
 
     try {
-      await axios.post("http://localhost:3001/createEntertainment", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/createEntertainment", {
         name,
         price: Number(price),
         rating: Number(rating),

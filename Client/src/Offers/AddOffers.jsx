@@ -34,7 +34,7 @@ const AddOffers = () => {
     }
 
     try {
-      await axios.post("http://localhost:3001/createOffers", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/createOffers", {
         name,
         des,
         price: Number(price),

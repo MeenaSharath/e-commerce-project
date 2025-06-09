@@ -17,7 +17,7 @@ const UpdateOffers = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getOffers/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/getOffers/${id}`)
       .then(result => {
         setName(result.data.name);
         setDes(result.data.des);
@@ -51,7 +51,7 @@ const UpdateOffers = () => {
       }
     }
 
-    axios.put(`http://localhost:3001/updateOffers/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateOffers/${id}`, {
         name,
         des,
         price: Number(price),

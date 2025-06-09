@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import Rating from '@mui/material/Rating';
-import { FaPlus } from 'react-icons/fa';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const AddRemoveCosItem = () => {
@@ -21,7 +20,7 @@ const AddRemoveCosItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/cosmeticpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/cosmeticpage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +36,7 @@ const AddRemoveCosItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteCos/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteCos/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

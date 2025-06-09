@@ -21,7 +21,7 @@ const AddRemoveGroceryItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/grocerypage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/grocerypage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ const AddRemoveGroceryItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteGrocery/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteGrocery/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

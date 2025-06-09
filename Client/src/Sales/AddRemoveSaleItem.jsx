@@ -36,7 +36,7 @@ const AddRemoveSaleItem = () => {
   useEffect(() => {
     const fetchSales = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/salepage', {
+        const res = await axios.get('https://e-commerce-project-dashboard.onrender.com/salepage', {
           withCredentials: true,
         });
 
@@ -64,7 +64,7 @@ const AddRemoveSaleItem = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/deleteSale/${id}`)
+      .delete(`https://e-commerce-project-dashboard.onrender.com/deleteSale/${id}`)
       .then(() => window.location.reload())
       .catch((err) => console.log("Delete Error:", err));
   };

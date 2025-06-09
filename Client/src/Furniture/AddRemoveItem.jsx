@@ -28,7 +28,7 @@ const AddRemoveItem = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/productpage')
+      .get('https://e-commerce-project-dashboard.onrender.com/productpage')
       .then((result) => setProd(result.data))
       .catch((err) => console.log(err));
   }, []);
@@ -40,7 +40,7 @@ const AddRemoveItem = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete('http://localhost:3001/deleteProd/' + id)
+      .delete('https://e-commerce-project-dashboard.onrender.com/deleteProd/' + id)
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
   };

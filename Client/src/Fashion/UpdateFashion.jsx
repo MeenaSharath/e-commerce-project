@@ -16,7 +16,7 @@ const UpdateFashion = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getFashion/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/getFashion/${id}`)
       .then(result => {
         setName(result.data.name);
         setPrice(result.data.price);
@@ -50,7 +50,7 @@ const UpdateFashion = () => {
       }
     }
 
-    axios.put(`http://localhost:3001/updateFashion/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateFashion/${id}`, {
       name,
       price: Number(price),
       rating: Number(rating),

@@ -21,7 +21,7 @@ const AddRemoveElectronicsItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/electronicspage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/electronicspage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ const AddRemoveElectronicsItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteElectronics/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteElectronics/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

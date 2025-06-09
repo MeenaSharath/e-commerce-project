@@ -21,7 +21,7 @@ const AddRemoveHealthItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('http://localhost:3001/healthpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/healthpage')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ const AddRemoveHealthItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/deleteHealth/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteHealth/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

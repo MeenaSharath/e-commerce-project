@@ -15,7 +15,7 @@ const AddSale = () => {
         e.preventDefault();
 
         try {
-            await axios.post("http://localhost:3001/createSale", {
+            await axios.post("https://e-commerce-project-dashboard.onrender.com/createSale", {
                 orderid: Number(orderid),
                 cname,
                 pname,
