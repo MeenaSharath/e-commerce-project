@@ -7,7 +7,7 @@ export default defineConfig({
     'process.env': process.env
   },
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' ? '/e-commerce-project/' : '/',
+  base: process.env.VITE_ENV_TARGET === 'github' ? '/e-commerce-project/' : '/',
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
