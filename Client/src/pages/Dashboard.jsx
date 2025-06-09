@@ -68,7 +68,7 @@ function Dashboard() {
 
             {/* Cards */}
             <div>
-            {location.pathname === '/e-commerce-project' && (
+            {location.pathname === '/' && (
               <div>
               <div  className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h1 className=" fs-2 text-xl md:text-xl text-gray-800 dark:text-gray-100 font-bold">Dashboard</h1>
