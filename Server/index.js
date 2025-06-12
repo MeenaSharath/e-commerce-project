@@ -33,7 +33,10 @@ app.use(cors({
   },
   credentials: true
 }));
-app.use(express.json())
+app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Welcome to the E-commerce Project Dashboard API');
+});
 app.use(cookieParser());
 app.use(orderRoutes);
 app.use("/salepage", saleItemsRoutes);
