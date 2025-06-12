@@ -120,8 +120,12 @@ app.put('/updateUser', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/loginUser', (req, res) => {
+  res.status(405).send('Method GET not allowed on /loginUser. Please use POST to login.');
+});
 
 app.post('/loginUser', (req, res) => {
+  console.log("🔔 /loginUser route hit");
   const { email, password } = req.body;
 
   UsersModel.findOne({ email: email })
@@ -129,10 +133,12 @@ app.post('/loginUser', (req, res) => {
       if (!emp) {
         return res.status(404).json({ message: 'No record existed' });
       }
+      console.log("Entered password:", password);
+console.log("Stored hashed password:", emp.password);
 
       const isMatch = await bcrypt.compare(password, emp.password);
       if (!isMatch) {
-        return res.status(401).json({ message: 'Incorrect password' });
+        return res.status(401).json({ message:'incorrect password' });
       }
 
       const token = jwt.sign({ id: emp._id }, JWT_SECRET, { expiresIn: '1d' });
