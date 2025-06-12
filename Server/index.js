@@ -21,7 +21,7 @@ const saleItemsRoutes = require("./routes/saleItemsRoutes");
 
 const app = express();
 const cookieParser = require("cookie-parser");
-const allowedOrigins = ['https://e-commerce-website-ten-nu-97.vercel.app','http://localhost:5173', 'http://localhost:3000','https://e-commerce-project-dashboard.onrender.com'];
+const allowedOrigins = ['https://e-commerce-project-beta-five.vercel.app','http://localhost:5173', 'http://localhost:3000','https://e-commerce-project-dashboard.onrender.com'];
 
 app.use(cors({
   origin: function (origin, callback) {
