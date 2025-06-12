@@ -26,7 +26,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'my_super_secret_key_123456';
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/ecommerce";
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000','https://e-commerce-project-dashboard.onrender.com'],
+  origin: ['https://e-commerce-website-ten-nu-97.vercel.app','http://localhost:5173', 'http://localhost:3000','https://e-commerce-project-dashboard.onrender.com'],
   credentials: true
 }));
 app.use(express.json());
