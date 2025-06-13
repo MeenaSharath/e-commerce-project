@@ -47,7 +47,7 @@ mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB connected"))
+.then(() => console.log("✅ MongoDB connected",MONGO_URI))
 .catch((err) => {
   console.error("❌ MongoDB connection error:", err.message);
   process.exit(1); // Stop the app if DB connection fails
@@ -123,31 +123,38 @@ app.put('/updateUser', authenticateToken, async (req, res) => {
 
 app.post('/loginUser', (req, res) => {
   const { email, password } = req.body;
+  console.log("LOGIN ATTEMPT:", email, password);
 
   UsersModel.findOne({ email: email })
-    .then(async emp => {
+    .then(emp => {
       if (!emp) {
         return res.status(404).json({ message: 'No record existed' });
       }
 
-      const isMatch = await bcrypt.compare(password, emp.password);
-      if (!isMatch) {
+      // 🔥 Plain text comparison
+      if (password !== emp.password) {
         return res.status(401).json({ message: 'Incorrect password' });
       }
 
+      // ✅ Create token
       const token = jwt.sign({ id: emp._id }, JWT_SECRET, { expiresIn: '1d' });
 
+      // ✅ Set token as cookie
       res.cookie('token', token, {
         httpOnly: true,
-        secure: false, // change to true in production with HTTPS
+        secure: false, // 🔒 set to true in production (HTTPS)
         sameSite: 'lax',
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
       });
 
-      res.json('Success');
+      return res.json({ message: 'Success', token });
     })
-    .catch(err => res.status(500).json({ error: 'Server error' }));
+    .catch(err => {
+      console.error("Server error:", err);
+      res.status(500).json({ error: 'Server error' });
+    });
 });
+
 
 app.get('/getCurrentUser', authenticateToken, async (req, res) => {
   try {
