@@ -22,19 +22,15 @@ const saleItemsRoutes = require("./routes/saleItemsRoutes");
 const app = express();
 const cookieParser = require("cookie-parser");
 const allowedOrigins = [
-  'e-commerce-project-beta-five.vercel.app',
-  'e-commerce-website-ten-nu-97.vercel.app',
-  'e-commerce-project-dashboard.onrender.com',
+  'vercel.app',
+  'onrender.com',
   'localhost:5173',
   'localhost:3000'
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (
-      !origin ||
-      allowedOrigins.some(allowed => origin.includes(allowed))
-    ) {
+    if (!origin || allowedOrigins.some(allowed => origin.includes(allowed))) {
       callback(null, true);
     } else {
       console.error('❌ CORS blocked origin:', origin);
@@ -43,6 +39,7 @@ app.use(cors({
   },
   credentials: true
 }));
+
 
 app.use(express.json());
 app.get('/', (req, res) => {
