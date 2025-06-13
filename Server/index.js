@@ -84,11 +84,13 @@ function authenticateToken(req, res, next) {
 
 
 app.get('/check-auth', (req, res) => {
-  if (req.cookies && req.cookies.isLoggedIn === 'true') {
+  const token = req.cookies.token;
+  if (!token) return res.json({ isAuthenticated: false });
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.json({ isAuthenticated: false });
     res.json({ isAuthenticated: true });
-  } else {
-    res.json({ isAuthenticated: false });
-  }
+  });
 });
 
 //Register
@@ -144,8 +146,12 @@ app.post('/loginUser', (req, res) => {
         return res.status(401).json({ message: 'Incorrect password' });
       }
 
+      console.log("LOGIN success");
+
       // ✅ Create token
       const token = jwt.sign({ id: emp._id }, JWT_SECRET, { expiresIn: '1d' });
+
+      console.log("Token:",token);
 
       // ✅ Set token as cookie
       res.cookie('token', token, {
