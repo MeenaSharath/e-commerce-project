@@ -21,18 +21,29 @@ const saleItemsRoutes = require("./routes/saleItemsRoutes");
 
 const app = express();
 const cookieParser = require("cookie-parser");
-const allowedOrigins = ['https://e-commerce-project-beta-five.vercel.app','http://localhost:5173', 'http://localhost:3000','https://e-commerce-project-dashboard.onrender.com','https://e-commerce-website-ten-nu-97.vercel.app'];
+const allowedOrigins = [
+  'e-commerce-project-beta-five.vercel.app',
+  'e-commerce-website-ten-nu-97.vercel.app',
+  'e-commerce-project-dashboard.onrender.com',
+  'localhost:5173',
+  'localhost:3000'
+];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (
+      !origin ||
+      allowedOrigins.some(allowed => origin.includes(allowed))
+    ) {
       callback(null, true);
     } else {
+      console.error('❌ CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
 }));
+
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Welcome to the E-commerce Project Dashboard API');
