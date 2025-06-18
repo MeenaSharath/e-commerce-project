@@ -113,6 +113,16 @@ app.post('/loginUser', async (req, res) => {
   res.json({ message: 'Success', token });
 });
 
+app.get('/logout', (req, res) => {
+  res.clearCookie('authToken', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',  
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
 app.put('/updateUser', authenticateToken, async (req, res) => {
   const { name, email, oldPassword, newPassword } = req.body;
   try {
