@@ -21,7 +21,7 @@ const AddRemoveEntertainmentItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/entertainmentpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/entertainment')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);

@@ -28,7 +28,7 @@ const AddRemoveItem = () => {
 
   useEffect(() => {
     axios
-      .get('https://e-commerce-project-dashboard.onrender.com/productpage')
+      .get('https://e-commerce-project-dashboard.onrender.com//categories/furniture')
       .then((result) => setProd(result.data))
       .catch((err) => console.log(err));
   }, []);

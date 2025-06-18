@@ -21,7 +21,7 @@ const AddRemoveFashionItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/fashionpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/fashion')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);

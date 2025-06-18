@@ -21,7 +21,7 @@ const AddRemoveElectronicsItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/electronicspage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/electronics')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);

@@ -20,7 +20,7 @@ const AddRemoveCosItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/cosmeticpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/cosmetic')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);

@@ -21,7 +21,7 @@ const AddRemoveHealthItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/healthpage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/health')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);

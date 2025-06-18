@@ -21,7 +21,7 @@ const AddRemoveGroceryItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/grocerypage')
+    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/grocery')
       .then(result => setProd(result.data))
       .catch(err => console.log(err));
   }, []);
