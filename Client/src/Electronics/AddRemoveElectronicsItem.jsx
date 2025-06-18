@@ -37,7 +37,7 @@ const AddRemoveElectronicsItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteElectronics/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/categories/electronics/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

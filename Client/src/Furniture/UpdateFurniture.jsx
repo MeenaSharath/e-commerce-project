@@ -17,7 +17,7 @@ const UpdateFurniture = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`https://e-commerce-project-dashboard.onrender.com/getProd/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/categories/furniture/${id}`)
       .then(result => {
         setName(result.data.name);
         setPrice(result.data.price);
@@ -51,7 +51,7 @@ const UpdateFurniture = () => {
       }
     }
 
-    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateProduct/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/categories/furniture/${id}`, {
       name,
       price: Number(price),
       rating: Number(rating),

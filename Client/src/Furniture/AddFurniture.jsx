@@ -33,7 +33,7 @@ const AddFurniture = () => {
     }
 
     try {
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createProd", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/furniture", {
         name,
         price: Number(price),
         rating: Number(rating),

@@ -37,7 +37,7 @@ const AddRemoveHealthItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteHealth/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/categories/health/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

@@ -33,7 +33,7 @@ const AddHealth = () => {
     }
 
     try {
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createHealth", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/health", {
         name,
         price: Number(price),
         rating: Number(rating),

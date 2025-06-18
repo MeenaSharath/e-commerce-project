@@ -33,7 +33,7 @@ const AddGrocery = () => {
     }
 
     try {
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createGrocery", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/grocery", {
         name,
         price: Number(price),
         rating: Number(rating),

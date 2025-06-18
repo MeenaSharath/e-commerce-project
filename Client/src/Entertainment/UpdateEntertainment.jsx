@@ -16,7 +16,7 @@ const UpdateEntertainment = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`https://e-commerce-project-dashboard.onrender.com/getEntertainment/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/categories/entertainment/${id}`)
       .then(result => {
         setName(result.data.name);
         setPrice(result.data.price);
@@ -50,7 +50,7 @@ const UpdateEntertainment = () => {
       }
     }
 
-    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateEntertainment/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/categories/entertainment/${id}`, {
       name,
       price: Number(price),
       rating: Number(rating),

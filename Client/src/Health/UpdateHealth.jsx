@@ -16,7 +16,7 @@ const UpdateHealth = () => {
   const currentPage = location.state?.currentPage || 1;
 
   useEffect(() => {
-    axios.get(`https://e-commerce-project-dashboard.onrender.com/getHealth/${id}`)
+    axios.get(`https://e-commerce-project-dashboard.onrender.com/categories/health/${id}`)
       .then(result => {
         setName(result.data.name);
         setPrice(result.data.price);
@@ -50,7 +50,7 @@ const UpdateHealth = () => {
       }
     }
 
-    axios.put(`https://e-commerce-project-dashboard.onrender.com/updateHealth/${id}`, {
+    axios.put(`https://e-commerce-project-dashboard.onrender.com/categories/health/${id}`, {
       name,
       price: Number(price),
       rating: Number(rating),

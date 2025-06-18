@@ -37,7 +37,7 @@ const AddRemoveGroceryItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteGrocery/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/categories/grocery/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

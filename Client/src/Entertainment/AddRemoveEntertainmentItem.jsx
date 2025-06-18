@@ -37,7 +37,7 @@ const AddRemoveEntertainmentItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteEntertainment/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com/categories/entertainment/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

@@ -33,7 +33,7 @@ const AddElectronics = () => {
     }
 
     try {
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createElectronics", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/electronics", {
         name,
         price: Number(price),
         rating: Number(rating),

@@ -28,7 +28,7 @@ const AddRemoveItem = () => {
 
   useEffect(() => {
     axios
-      .get('https://e-commerce-project-dashboard.onrender.com//categories/furniture')
+      .get('https://e-commerce-project-dashboard.onrender.com/categories/furniture')
       .then((result) => setProd(result.data))
       .catch((err) => console.log(err));
   }, []);
@@ -40,7 +40,7 @@ const AddRemoveItem = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete('https://e-commerce-project-dashboard.onrender.com/deleteProd/' + id)
+      .delete('https://e-commerce-project-dashboard.onrender.com/categories/furniture/' + id)
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
   };

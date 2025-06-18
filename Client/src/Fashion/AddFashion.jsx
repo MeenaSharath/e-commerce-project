@@ -33,7 +33,7 @@ const AddFashion = () => {
     }
 
     try {
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createFashion", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/fashion", {
         name,
         price: Number(price),
         rating: Number(rating),

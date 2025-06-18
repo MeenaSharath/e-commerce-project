@@ -36,7 +36,7 @@ const AddRemoveCosItem = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://e-commerce-project-dashboard.onrender.com/deleteCos/${id}`)
+    axios.delete(`https://e-commerce-project-dashboard.onrender.com//categories/cosmetic/${id}`)
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };

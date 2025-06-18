@@ -38,7 +38,7 @@ const AddCosmetic = () => {
       }
 
       // ✅ Use Render backend URL
-      await axios.post("https://e-commerce-project-dashboard.onrender.com/createCos", {
+      await axios.post("https://e-commerce-project-dashboard.onrender.com/categories/cosmetic", {
         name,
         price: Number(price),
         rating: Number(rating),
