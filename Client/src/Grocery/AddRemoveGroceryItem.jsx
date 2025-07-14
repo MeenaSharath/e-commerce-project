@@ -1,17 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { Link, useSearchParams} from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import Rating from '@mui/material/Rating';
-import { FaPlus } from 'react-icons/fa';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
+import html2pdf from 'html2pdf.js';
+import { BiExport } from 'react-icons/bi';
 
 const AddRemoveGroceryItem = () => {
-  const navigate = useNavigate();
   const [prod, setProd] = useState([]);
   const [searchVisible, setSearchVisible] = useState(false);
   const toggleSearch = () => setSearchVisible((prev) => !prev);
   const [searchTerm, setSearchTerm] = useState('');
+  const [exportMenuVisible, setExportMenuVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  
   const [searchParams, setSearchParams] = useSearchParams();
   const pageFromParams = parseInt(searchParams.get('page')) || 1;
   const [currentPage, setCurrentPage] = useState(pageFromParams);
@@ -31,6 +36,19 @@ const AddRemoveGroceryItem = () => {
   );
   const currentProd = filteredProd.slice(indexOfFirstProd, indexOfLastProd);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setExportMenuVisible(false);
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum);
     setSearchParams({ page: pageNum });
@@ -41,6 +59,61 @@ const AddRemoveGroceryItem = () => {
       .then(() => window.location.reload())
       .catch(err => console.log(err));
   };
+
+  const exportToExcel = () => {
+    const selectedData = currentProd.map(item => ({
+      Name: item.name,
+      Price: item.price,
+      Stock: item.stock
+    }));
+  
+    const worksheet = XLSX.utils.json_to_sheet(selectedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Selected Columns');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, 'grocery-products.xlsx');
+  };
+  
+  const exportToPDF = () => {
+    let htmlContent = `
+      <table border="1" style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr><th>Name</th><th>Price</th><th>Stock</th></tr>
+        </thead>
+        <tbody>
+          ${currentProd.map(item =>
+            `<tr><td>${item.name}</td><td>₹${item.price}</td><td>${item.stock}</td></tr>`
+          ).join('')}
+        </tbody>
+      </table>
+    `;
+  
+    const element = document.createElement('div');
+    element.innerHTML = htmlContent;
+    html2pdf().from(element).save('grocery-products.pdf');
+  };
+  
+  const exportToWord = () => {
+    let htmlContent = `
+      <table border="1" style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr><th>Name</th><th>Price</th><th>Stock</th></tr>
+        </thead>
+        <tbody>
+          ${currentProd.map(item =>
+            `<tr><td>${item.name}</td><td>₹${item.price}</td><td>${item.stock}</td></tr>`
+          ).join('')}
+        </tbody>
+      </table>
+    `;
+  
+    const blob = new Blob(['<html><body>' + htmlContent + '</body></html>'], {
+      type: 'application/msword'
+    });
+    saveAs(blob, 'grocery-products.doc');
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 py-3 px-4">
@@ -63,7 +136,37 @@ const AddRemoveGroceryItem = () => {
               />
             )}
           </div>
-        </div>
+       <div ref={dropdownRef} >
+                 <button
+         type="button"
+         onClick={() => setExportMenuVisible((prev) => !prev)}
+         className="text-xl text-gray-400 cursor-pointer hover:text-blue-400 transition"
+         title="Export"
+       >
+         <BiExport />
+       </button>
+         {exportMenuVisible && (
+           <div
+             className="origin-top-right absolute right-0 mt-1 w-25 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+             role="menu"
+             aria-orientation="vertical"
+             aria-labelledby="menu-button"
+           >
+             <div className="py-1" role="none">
+               <button onClick={exportToExcel} className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 w-25 text-left">
+                 Excel
+               </button>
+               <button onClick={exportToPDF} className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 w-25 text-left">
+                 PDF
+               </button>
+               <button onClick={exportToWord} className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 w-25 text-left">
+                 Word
+               </button>
+             </div>
+           </div>
+         )}
+         </div>
+       </div>
 
         {/* Table */}
         {currentProd.length > 0 ? (
