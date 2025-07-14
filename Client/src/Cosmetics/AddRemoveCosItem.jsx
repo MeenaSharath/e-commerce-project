@@ -26,28 +26,31 @@ const AddRemoveCosItem = () => {
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
 
   useEffect(() => {
-    axios.get('https://e-commerce-project-dashboard.onrender.com/categories/cosmetic')
-      .then(result => setProd(result.data))
-      .catch(err => console.log(err));
-  }, []);
+  // Fetch cosmetic products
+  axios.get('https://e-commerce-project-dashboard.onrender.com/categories/cosmetic')
+    .then(result => setProd(result.data))
+    .catch(err => console.log(err));
+
+  // Outside click handler for export dropdown
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setExportMenuVisible(false);
+    }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+
+  // Cleanup
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
 
   const filteredProd = prod.filter((prods) =>
     prods.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const currentProd = filteredProd.slice(indexOfFirstProd, indexOfLastProd);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setExportMenuVisible(false);
-      }
-    };
-  
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum);
@@ -102,7 +105,7 @@ const AddRemoveCosItem = () => {
         </thead>
         <tbody>
           ${currentProd.map(item =>
-            `<tr><td>${item.name}</td><td>₹${item.price}</td><td>${item.stock}</td></tr>`
+            `<tr><td>${item.name}</td><td>&#8377;${item.price}</td><td>${item.stock}</td></tr>`
           ).join('')}
         </tbody>
       </table>

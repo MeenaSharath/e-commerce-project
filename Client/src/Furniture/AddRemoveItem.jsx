@@ -35,9 +35,8 @@ const AddRemoveItem = () => {
       .get('https://e-commerce-project-dashboard.onrender.com/categories/furniture')
       .then((result) => setProd(result.data))
       .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
+      // Outside click handler for export dropdown
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setExportMenuVisible(false);
@@ -45,6 +44,8 @@ const AddRemoveItem = () => {
   };
 
   document.addEventListener('mousedown', handleClickOutside);
+
+  // Cleanup
   return () => {
     document.removeEventListener('mousedown', handleClickOutside);
   };
@@ -97,25 +98,24 @@ const exportToPDF = () => {
 };
 
 const exportToWord = () => {
-  let htmlContent = `
-    <table border="1" style="width:100%; border-collapse: collapse;">
-      <thead>
-        <tr><th>Name</th><th>Price</th><th>Stock</th></tr>
-      </thead>
-      <tbody>
-        ${currentProd.map(item =>
-          `<tr><td>${item.name}</td><td>₹${item.price}</td><td>${item.stock}</td></tr>`
-        ).join('')}
-      </tbody>
-    </table>
-  `;
-
-  const blob = new Blob(['<html><body>' + htmlContent + '</body></html>'], {
-    type: 'application/msword'
-  });
-  saveAs(blob, 'furniture-products.doc');
-};
-
+    let htmlContent = `
+      <table border="1" style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr><th>Name</th><th>Price</th><th>Stock</th></tr>
+        </thead>
+        <tbody>
+          ${currentProd.map(item =>
+            `<tr><td>${item.name}</td><td>&#8377;${item.price}</td><td>${item.stock}</td></tr>`
+          ).join('')}
+        </tbody>
+      </table>
+    `;
+  
+    const blob = new Blob(['<html><body>' + htmlContent + '</body></html>'], {
+      type: 'application/msword'
+    });
+    saveAs(blob, 'furniture-products.doc');
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-3 px-4">
